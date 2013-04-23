@@ -1,6 +1,8 @@
 #!/bin/bash
 
-VERTX_VERSION="2.0.0-SNAPSHOT"
+cd $OPENSHIFT_REPO_DIR
+
+. ".openshift/config.example"
 
 cd $OPENSHIFT_DATA_DIR
 

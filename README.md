@@ -1,65 +1,46 @@
-# OpenShift template for Vert.x applications
+# OpenShift template for Vert.x 2.0 applications
 
-Template for running [Vert.x](https://github.com/purplefox/vert.x) applications on OpenShift
+Example demonstrating how to run the original [Vert.x OpenShift template](https://github.com/purplefox/openshift-vertx) with vert.x-2.0.0-SNAPSHOT.
 
-## What it does?
+## How to create your app (with name <name>)
 
-* The demo currently runs the Vert.x webapp demo - which is a shop webapp that uses MongoDB at the back-end
+1. Create a new app directory and enter it:
+	
+	mkdir <name>
+	cd <name>
+	git init
 
-## Configuration
+2. Create a new OpenShift application:
 
-is in .openshift/config.example
+	rhc app create -a <name> -t diy-0.1
 
-## Lifecycle hooks
+3. Add MongoDB:
 
-are in .openshift/action_hooks
+	rhc cartridge add mongodb-2.2 -a <name>
+	
+4. Use the git url you received in step 2 to add it as a remote repo:
 
-## All the rest of the stuff
+	git remote add origin <your_openshift_git_link>
+	
+5. Pull the stuff from OpenShift:
 
-Is the webapp demo from the Vert.x distro
+	git pull -s recursive -X theirs origin master
+	
+6. Add _this_ repository as new remote:
+	
+	git remote add template -m master git://github.com/campudus/openshift-vertx.git
 
-Replace this with your app and update $SERVER_FILE on config.example
-
-## How to create your app (with name $name)
-
-Create OpenShift application
-
-	rhc app create -a $name -t diy-0.1
-
-Add MongoDB (if you need it - the webapp demo does, otherwise don't bother)
-
-	rhc cartridge add mongodb -a $name
-
-This will create a new git repo for your application
-
-and enter the directory
-
-	cd $name
-
-Add _this_ repository as new remote
-
-	git remote add template -m master git://github.com/purplefox/openshift-vertx.git
-
-and pull locally
+7. Pull locally:
 
 	git pull -s recursive -X theirs template master
 
-and deploy to OpenShift
+8. Deploy to OpenShift:
 
 	git push origin master
 
-Now, your application is available at
+This will run through all action hooks executing them.
 
-	http://$name-$namespace.rhcloud.com
+9. To read the log, you need to ssh to your app on OpenShift:
 
-e.g. https://openshiftvertx-purplefox.rhcloud.com/
-
-## Notes for Ruby, Python
-
-If you want to write Ruby or Python applications with Vert.x you will have to install
-JRuby and/or Jython in your application and set the env vars JRUBY_HOME and JYTHON_HOME to point
-to those installations.
-
-Take a look how we install vert.x in the script .openshift/action_hooks/pre_build for an idea of how to do that.
-
-
+	rhc ssh <name>
+	cat $OPENSHIFT_DIY_LOG_DIR/vert.x.log
