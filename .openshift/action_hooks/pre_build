@@ -16,7 +16,7 @@ else
 
 	echo "Installing Vert.x $VERTX_VERSION"
 
-	tar -xf $OPENSHIFT_REPO_DIRvert.x-${VERTX_VERSION}.tar.gz vert.x-${VERTX_VERSION}
+	tar -xf ${OPENSHIFT_REPO_DIR}vert.x-${VERTX_VERSION}.tar.gz vert.x-${VERTX_VERSION}
 fi
 
 
