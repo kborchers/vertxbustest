@@ -1,5 +1,3 @@
-var vertx = require('vertx.js');
-
 var eb = vertx.eventBus;
 
 var pa = 'vertx.mongopersistor';
