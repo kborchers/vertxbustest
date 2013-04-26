@@ -4,6 +4,7 @@ start-up of the verticles that make up the application.
  */
 
 var vertx = require('vertx.js');
+var container = require('container');
 
 // Our application config - you can maintain it here or alternatively you could
 // stick it in a conf.json text file and specify that on the command line when
@@ -14,8 +15,8 @@ var webServerConf = {
 
   // Normal web server stuff
 
-  port: parseInt(vertx.env['OPENSHIFT_INTERNAL_PORT']),
-  host: vertx.env['OPENSHIFT_INTERNAL_IP'],
+  port: parseInt(container.env['OPENSHIFT_INTERNAL_PORT']),
+  host: container.env['OPENSHIFT_INTERNAL_IP'],
   ssl: false, // OpenShift handles SSL for us
 
   // Configuration for the event bus client side bridge
