@@ -60,11 +60,11 @@ var webServerConf = {
 // Deploy a MongoDB persistor module
 
 var mongoConf = {
-  host: vertx.env['OPENSHIFT_MONGODB_DB_HOST'],
-  port: parseInt(vertx.env['OPENSHIFT_MONGODB_DB_PORT']),
-  username: vertx.env['OPENSHIFT_MONGODB_DB_USERNAME'],
-  password: vertx.env['OPENSHIFT_MONGODB_DB_PASSWORD'],
-  db_name: vertx.env['OPENSHIFT_APP_NAME']
+  host: container.env['OPENSHIFT_MONGODB_DB_HOST'],
+  port: parseInt(container.env['OPENSHIFT_MONGODB_DB_PORT']),
+  username: container.env['OPENSHIFT_MONGODB_DB_USERNAME'],
+  password: container.env['OPENSHIFT_MONGODB_DB_PASSWORD'],
+  db_name: container.env['OPENSHIFT_APP_NAME']
 }
 
 vertx.deployModule('io.vertx~mod-mongo-persistor~2.0.0-SNAPSHOT', mongoConf, 1, function() {
