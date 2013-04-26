@@ -4,6 +4,7 @@ start-up of the verticles that make up the application.
  */
 
 var vertx = require('vertx');
+var console = require('console');
 var container = require('container');
 
 // Our application config - you can maintain it here or alternatively you could
