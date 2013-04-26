@@ -1,65 +1,44 @@
-# OpenShift template for Vert.x applications
+# OpenShift template for Vert.x 2.0 applications
 
-Template for running [Vert.x](https://github.com/purplefox/vert.x) applications on OpenShift
-
-## What it does?
-
-* The demo currently runs the Vert.x webapp demo - which is a shop webapp that uses MongoDB at the back-end
-
-## Configuration
-
-is in .openshift/config.example
-
-## Lifecycle hooks
-
-are in .openshift/action_hooks
-
-## All the rest of the stuff
-
-Is the webapp demo from the Vert.x distro
-
-Replace this with your app and update $SERVER_FILE on config.example
+Example demonstrating how to run the original [Vert.x OpenShift template](https://github.com/purplefox/openshift-vertx) with vert.x-2.0.0-SNAPSHOT.
 
 ## How to create your app (with name $name)
 
-Create OpenShift application
+Create a new app directory and enter it:
+	
+	mkdir $name
+	cd $name
+	git init
+
+Create a new OpenShift application:
 
 	rhc app create -a $name -t diy-0.1
 
-Add MongoDB (if you need it - the webapp demo does, otherwise don't bother)
+Add MongoDB:
 
-	rhc cartridge add mongodb -a $name
+	rhc cartridge add mongodb-2.2 -a $name
+	
+Use the git url you received in step 2 to add it as a remote repo:
 
-This will create a new git repo for your application
+	git remote add origin {your_openshift_git_link}
+	
+Pull the stuff from OpenShift:
 
-and enter the directory
+	git pull -s recursive -X theirs origin master
+	
+Add _this_ repository as new remote:
+	
+	git remote add template -m master git://github.com/campudus/openshift-vertx.git
 
-	cd $name
-
-Add _this_ repository as new remote
-
-	git remote add template -m master git://github.com/purplefox/openshift-vertx.git
-
-and pull locally
+Pull locally:
 
 	git pull -s recursive -X theirs template master
 
-and deploy to OpenShift
+Deploy to OpenShift. This will run through all action hooks executing them:
 
 	git push origin master
 
-Now, your application is available at
+To read the log, you need to ssh to your app on OpenShift:
 
-	http://$name-$namespace.rhcloud.com
-
-e.g. https://openshiftvertx-purplefox.rhcloud.com/
-
-## Notes for Ruby, Python
-
-If you want to write Ruby or Python applications with Vert.x you will have to install
-JRuby and/or Jython in your application and set the env vars JRUBY_HOME and JYTHON_HOME to point
-to those installations.
-
-Take a look how we install vert.x in the script .openshift/action_hooks/pre_build for an idea of how to do that.
-
-
+	rhc ssh $name
+	cat $OPENSHIFT_DIY_LOG_DIR/vert.x.log

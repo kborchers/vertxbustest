@@ -1,1 +1,0 @@
-This is the webapp turorial from the Vert.x distro and the online tutorial

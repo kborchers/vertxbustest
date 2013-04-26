@@ -1,1 +1,0 @@
-This is the basic http example from the Vert.x distro
