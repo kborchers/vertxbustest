@@ -3,7 +3,7 @@ This verticle contains the configuration for our application and co-ordinates
 start-up of the verticles that make up the application.
  */
 
-var vertx = require('vertx.js');
+var vertx = require('vertx');
 var container = require('container');
 
 // Our application config - you can maintain it here or alternatively you could
