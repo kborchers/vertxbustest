@@ -67,19 +67,19 @@ var mongoConf = {
   db_name: container.env['OPENSHIFT_APP_NAME']
 }
 
-vertx.deployModule('io.vertx~mod-mongo-persistor~2.0.0-SNAPSHOT', mongoConf, 1, function() {
+container.deployModule('io.vertx~mod-mongo-persistor~2.0.0-SNAPSHOT', mongoConf, 1, function() {
 
   // And when it's deployed run a script to load it with some reference
   // data for the demo
-  require('static_data.js');
+  load('static_data.js');
 
   console.log("Static data loaded");
 });
 
 // Deploy an auth manager to handle the authentication
 
-vertx.deployModule('io.vertx~mod-auth-mgr~2.0.0-SNAPSHOT');
+container.deployModule('io.vertx~mod-auth-mgr~2.0.0-SNAPSHOT');
 
 // Start the web server, with the config we defined above
 
-vertx.deployModule('io.vertx~mod-web-server~2.0.0-SNAPSHOT', webServerConf);
+container.deployModule('io.vertx~mod-web-server~2.0.0-SNAPSHOT', webServerConf);
