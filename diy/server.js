@@ -1,4 +1,4 @@
-load('vertx.js');
+require('vertx.js');
 
 var eb = vertx.eventBus;
 
