@@ -4,6 +4,6 @@ var httpServer = vertx.createHttpServer();
 
 var sockJSServer = vertx.createSockJSServer(httpServer);
 
-sockJSServer.bridge({prefix : '/eventbus'}, [], [] );
+sockJSServer.bridge({prefix : '/eventbus'}, [{}], [{}] );
 
-server.listen(8080);
+httpServer.listen(8080);
