@@ -1,8 +1,6 @@
 #!/bin/bash
 
-cd $OPENSHIFT_REPO_DIR
-
-. ".openshift/config.example"
+. "${OPENSHIFT_REPO_DIR}.openshift/config.example"
 
 cd $OPENSHIFT_DATA_DIR
 
