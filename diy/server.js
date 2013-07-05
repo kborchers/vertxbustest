@@ -1,7 +1,9 @@
 var vertx = require('vertx.js');
 
-var eb = vertx.eventBus;
+var httpServer = vertx.createHttpServer();
 
-eb.registerHandler('test.address', function( message ) {
-    eb.send('test.address', message);
-});
+var sockJSServer = vertx.createSockJSServer(httpServer);
+
+sockJSServer.bridge({prefix : '/eventbus'}, [], [] );
+
+server.listen(8080);
