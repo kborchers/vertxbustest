@@ -6,4 +6,4 @@ cd $OPENSHIFT_REPO_DIR$EXAMPLE_DIR
 
 echo "Starting Vert.x application!"
 
-nohup bash -c "exec 'vertx' 'run' '${SERVER_FILE}' &> ${OPENSHIFT_DIY_LOG_DIR}vert.x.log" &> /dev/null &
+nohup bash -c "exec 'vertx' 'run' '${SERVER_FILE}' -conf ${OPENSHIFT_REPO_DIR}.openshift/config.example &> ${OPENSHIFT_DIY_LOG_DIR}vert.x.log" &> /dev/null &
