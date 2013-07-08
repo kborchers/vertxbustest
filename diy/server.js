@@ -6,4 +6,4 @@ var sockJSServer = vertx.createSockJSServer(httpServer);
 
 sockJSServer.bridge({prefix : '/eventbus'}, [{}], [{}] );
 
-httpServer.listen(vertx.env['OPENSHIFT_INTERNAL_PORT'], vertx.env['OPENSHIFT_INTERNAL_IP']);
+httpServer.listen(process.env['OPENSHIFT_INTERNAL_PORT'], process.env['OPENSHIFT_INTERNAL_IP']);
