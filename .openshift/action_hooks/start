@@ -3,8 +3,6 @@
 . "${OPENSHIFT_REPO_DIR}.openshift/config.example"
 
 cd $OPENSHIFT_REPO_DIR$EXAMPLE_DIR
-export OPENSHIFT_INTERNAL_IP=$OPENSHIFT_DIY_IP
-export OPENSHIFT_INTERNAL_PORT=$OPENSHIFT_DIY_PORT
 
 echo "Starting Vert.x application!"
 
