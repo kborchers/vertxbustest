@@ -3,7 +3,7 @@
 VERTX_VERSION="vert.x-2.0.0-final"
 
 if [ "$1" == "stop" ]; then
-    echo Stopping the server
+    echo "Server stopped!"
     for i in `ps -ef | grep -i vertx | awk '{print $2}'`
     do
       kill -9 $i 2> /dev/null
@@ -21,6 +21,6 @@ else
   echo "The path does not contain a vertx distribution"
 fi
 
-echo "Starting the server!"
+echo "Server started!"
 
 nohup $VERTX_VERSION/bin/vertx run diy/server.js -conf conf/config.json &
